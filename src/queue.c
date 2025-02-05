@@ -31,6 +31,9 @@ void enqueue(Queue* q, int value){
 }
 
 void dequeue(Queue* q){
+    if (isEmpty(q)){
+        return;
+    }
     Node* temp = q->front;
     q->front = q->front->next;
     free(temp);
