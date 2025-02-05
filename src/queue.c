@@ -9,36 +9,44 @@
 #include <stdio.h>
 #include "queue.h"
 
-Queue* createQueue(){
+// Create a new queue
+Queue* createQueue() {
     Queue* q = (Queue*)malloc(sizeof(Queue));
     q->front = NULL;
     q->rear = NULL;
     return q;
 }
 
-void enqueue(Queue* q, int value){
+// Enqueue a new value to the queue
+void enqueue(Queue* q, int value) {
     Node* temp = (Node*)malloc(sizeof(Node));
     temp->data = value;
-    temp->next = NULL; 
+    temp->next = NULL;
 
-    if (isEmpty(q)){
+    if (isEmpty(q)) {
         q->front = temp;
         q->rear = temp;
-        return;
+    } else {
+        q->rear->next = temp;
+        q->rear = temp;
     }
-    q->rear->next = temp;
-    q->rear = temp;
 }
 
-void dequeue(Queue* q){
-    if (isEmpty(q)){
+// Dequeue a value from the queue
+void dequeue(Queue* q) {
+    if (isEmpty(q)) {
         return;
     }
     Node* temp = q->front;
     q->front = q->front->next;
     free(temp);
+
+    if (q->front == NULL) {
+        q->rear = NULL;
+    }
 }
 
+// Check if the queue is empty
 int isEmpty(Queue* q) {
     return q->front == NULL;
 }
