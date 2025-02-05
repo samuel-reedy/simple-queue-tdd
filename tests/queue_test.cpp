@@ -59,6 +59,13 @@ TEST_F(QueueTest, MultipleEnqueueDequeue) {
     EXPECT_TRUE(isEmpty(queue));
 }
 
+// Test dequeuing an empty queue
+TEST_F(QueueTest, EmptyQueueDequeue) {
+    EXPECT_TRUE(isEmpty(queue));
+    dequeue(queue);
+    EXPECT_TRUE(isEmpty(queue));
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
